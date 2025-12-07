@@ -30,6 +30,7 @@ However, the Frontend has been completely re-skinned to serve the "Chain of Grat
 - **Smart Contract Language:** Move
 - **Frontend:** Next.js, TypeScript, IOTA dApp Kit, Radix UI
 - **Package ID:** `0x572fe621c85d764c1564837f5deb8273dfe5631e8184ef4a08f49e83cecc67d5`
+- **Contract Address:** https://explorer.iota.org/object/0x572fe621c85d764c1564837f5deb8273dfe5631e8184ef4a08f49e83cecc67d5?network=devnet
 
 ## 🚀 Installation & Setup
 
