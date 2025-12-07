@@ -2,7 +2,7 @@
 
 **Dự án Final Project cho khóa học Rise In - IOTA Move Developer.**
 
-Đây là ứng dụng **Nhật ký Biết Ơn Phi Tập Trung** (Decentralized Gratitude Journal) chạy trên mạng lưới IOTA Testnet. Ứng dụng giúp người dùng lưu giữ những điều tốt đẹp, những lời cảm ơn một cách vĩnh cửu (immutable) trên Blockchain.
+Đây là ứng dụng **Nhật ký Biết Ơn** (Decentralized Gratitude Journal) chạy trên mạng lưới IOTA Testnet. Ứng dụng giúp người dùng lưu giữ những điều tốt đẹp, những lời cảm ơn một cách vĩnh cửu (immutable) trên Blockchain.
 
 ## 📖 Giới thiệu
 Thay vì một danh sách công việc khô khan, **Chain of Gratitude** biến các thao tác CRUD (Tạo, Đọc, Sửa, Xóa) trên Blockchain thành một trải nghiệm cảm xúc:
