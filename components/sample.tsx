@@ -1,18 +1,18 @@
 "use client";
 
 import { useCurrentAccount, useSignAndExecuteTransaction, useIotaClientQuery } from "@iota/dapp-kit";
-import { Button, Container, Heading, Text, TextField, Card, Badge, Flex } from "@radix-ui/themes";
+import { Button, Container, Heading, Text, Card, Badge, Flex } from "@radix-ui/themes";
 import { useState } from "react";
 import { Transaction } from "@iota/iota-sdk/transactions";
 import { PACKAGE_ID, MODULE_NAME } from "@/lib/config";
-import { TrashIcon, CheckIcon, PlusIcon } from "@radix-ui/react-icons";
+import { TrashIcon, CheckIcon, HeartFilledIcon, PaperPlaneIcon } from "@radix-ui/react-icons";
 
 const SampleIntegration = () => {
   const currentAccount = useCurrentAccount();
   const { mutate: signAndExecuteTransaction } = useSignAndExecuteTransaction();
   const [taskContent, setTaskContent] = useState("");
 
-  // 1. QUERY DATA
+  // 1. QUERY DATA (Lấy dữ liệu từ Blockchain)
   const { data: tasksData, refetch, isPending } = useIotaClientQuery(
     "getOwnedObjects",
     {
@@ -26,10 +26,10 @@ const SampleIntegration = () => {
     }
   );
 
-  // --- HÀM XỬ LÝ TRANSACTION RIÊNG BIỆT (Để tránh lỗi IndexOutOfBounds) ---
+  // --- HÀM XỬ LÝ TRANSACTION ---
 
-  // 1. Tạo Task
-  const createNewTask = () => {
+  // 1. Gửi lời biết ơn (Thực chất là tạo Task)
+  const createGratitude = () => {
     if (!taskContent) return;
     const tx = new Transaction();
     
@@ -38,23 +38,23 @@ const SampleIntegration = () => {
       arguments: [tx.pure.string(taskContent)],
     });
 
-    executeTx(tx, "Đã thêm công việc thành công!", () => setTaskContent(""));
+    executeTx(tx, "Đã gửi lời biết ơn lên vũ trụ! 🌸", () => setTaskContent(""));
   };
 
-  // 2. Hoàn thành Task
-  const completeTask = (objectId: string) => {
+  // 2. Khắc ghi/Trân trọng (Thực chất là Complete Task)
+  const cherishGratitude = (objectId: string) => {
     const tx = new Transaction();
     
     tx.moveCall({
       target: `${PACKAGE_ID}::${MODULE_NAME}::complete_task`,
-      arguments: [tx.object(objectId)], // tx.object PHẢI nằm trong cùng 1 instance tx
+      arguments: [tx.object(objectId)],
     });
 
-    executeTx(tx, "Đã hoàn thành công việc!");
+    executeTx(tx, "Đã khắc ghi điều này vào tim! ❤️");
   };
 
-  // 3. Xóa Task
-  const deleteTask = (objectId: string) => {
+  // 3. Buông bỏ/Xóa (Thực chất là Delete Task)
+  const forgetGratitude = (objectId: string) => {
     const tx = new Transaction();
     
     tx.moveCall({
@@ -62,10 +62,10 @@ const SampleIntegration = () => {
       arguments: [tx.object(objectId)],
     });
 
-    executeTx(tx, "Đã xóa công việc!");
+    executeTx(tx, "Đã xóa khỏi dòng chảy ký ức.");
   };
 
-  // Hàm helper để ký và gửi (chỉ dùng để rút gọn đoạn sign)
+  // Helper function
   const executeTx = (tx: Transaction, successMsg: string, callback?: () => void) => {
     signAndExecuteTransaction(
       { transaction: tx },
@@ -87,10 +87,10 @@ const SampleIntegration = () => {
 
   if (!currentAccount) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-100 text-black">
-        <div className="text-center p-8 bg-white rounded-xl shadow-lg border border-gray-200">
-          <Heading size="8" className="mb-4 text-blue-600">📝 To-Do List</Heading>
-          <Text size="4" className="text-gray-600">Kết nối ví để quản lý công việc</Text>
+      <div className="flex min-h-screen items-center justify-center bg-rose-50 text-black">
+        <div className="text-center p-8 bg-white rounded-xl shadow-lg border border-rose-100">
+          <Heading size="8" className="mb-4 text-rose-600">🌸 Chain of Gratitude</Heading>
+          <Text size="4" className="text-gray-600">Kết nối ví để bắt đầu hành trình biết ơn.</Text>
         </div>
       </div>
     );
@@ -106,71 +106,75 @@ const SampleIntegration = () => {
   }) || [];
 
   return (
-    // FIX UI: Thêm text-gray-900 để ép chữ màu đen, bg-white để ép nền trắng
-    <div className="min-h-screen p-8 bg-gray-50 text-gray-900">
+    // Đổi nền sang màu hồng nhạt (rose-50) cho ấm áp
+    <div className="min-h-screen p-8 bg-rose-50 text-gray-900">
       <Container size="3">
-        <Heading size="8" align="center" className="mb-8 text-blue-700 drop-shadow-sm">
-           Quản Lý Công Việc (On-Chain)
+        <Heading size="8" align="center" className="mb-2 text-rose-600 drop-shadow-sm font-serif">
+           🌸 Chuỗi Biết Ơn (On-Chain)
         </Heading>
+        <Text align="center" as="p" className="mb-8 text-gray-500 italic">
+          "Lưu giữ những điều tốt đẹp vĩnh cửu trên Blockchain"
+        </Text>
 
-        {/* INPUT FORM - Đã sửa lại màu sắc độ tương phản cao */}
-        <div className="mb-8 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
+        {/* INPUT FORM */}
+        <div className="mb-8 p-6 bg-white rounded-xl shadow-lg border border-rose-200">
           <Heading size="4" className="mb-4 text-gray-800 font-bold">
-            Thêm công việc mới
+            Hôm nay bạn biết ơn điều gì?
           </Heading>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-grow">
-              {/* Dùng thẻ input thường thay vì TextField của Radix để dễ chỉnh màu */}
               <input 
                 type="text"
-                placeholder="Ví dụ: Đi chợ, Học Move..." 
+                placeholder="Ví dụ: Cảm ơn bản thân vì đã không bỏ cuộc..." 
                 value={taskContent}
                 onChange={(e) => setTaskContent(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg text-black bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                className="w-full p-3 border border-rose-200 rounded-lg text-black bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-400 transition-all"
               />
             </div>
             
-            {/* Nút bấm chỉnh màu cứng: Nền xanh đậm, chữ trắng */}
+            {/* Nút bấm màu Hồng (Rose) */}
             <button 
-              onClick={createNewTask} 
+              onClick={createGratitude} 
               disabled={!taskContent} 
               className={`
                 px-6 py-3 rounded-lg font-bold text-white shadow-md transition-all flex items-center justify-center
-                ${!taskContent ? 'bg-red-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 active:scale-95 cursor-pointer'}
+                ${!taskContent ? 'bg-red-500 cursor-not-allowed' : 'bg-rose-500 hover:bg-rose-600 active:scale-95 cursor-pointer'}
               `}
             >
-              <PlusIcon className="w-5 h-5 mr-2" /> 
-              THÊM NGAY
+              <PaperPlaneIcon className="w-4 h-4 mr-2" /> {/* Icon gửi đi */}
+              GỬI LỜI BIẾT ƠN
             </button>
           </div>
         </div>
 
-        {/* TASK LIST - FIX UI: Card nền trắng, chữ đen */}
-        <Heading size="4" mb="4" className="text-gray-800 border-b pb-2">
-          Danh sách công việc ({tasks.length})
+        {/* LIST */}
+        <Heading size="4" mb="4" className="text-gray-800 border-b border-rose-200 pb-2">
+          Nhật ký biết ơn của tôi ({tasks.length})
         </Heading>
         
         {isPending ? (
-          <Text className="text-gray-500 italic">Đang tải dữ liệu...</Text>
+          <Text className="text-gray-500 italic">Đang lắng nghe vũ trụ...</Text>
         ) : tasks.length === 0 ? (
-          <div className="text-center p-8 bg-white rounded border border-dashed border-gray-300">
-             <Text className="text-gray-500">Chưa có công việc nào. Hãy tạo cái đầu tiên!</Text>
+          <div className="text-center p-8 bg-white rounded border border-dashed border-rose-300">
+             <Text className="text-gray-500">Chưa có hạt mầm nào. Hãy gieo điều đầu tiên!</Text>
           </div>
         ) : (
           <div className="flex flex-col gap-3">
             {tasks.map((task) => (
-              <Card key={task.id} className="hover:shadow-md transition-all bg-white border border-gray-200">
+              <Card key={task.id} className={`hover:shadow-md transition-all border ${task.is_done ? 'bg-rose-50 border-rose-300' : 'bg-white border-gray-200'}`}>
                 <Flex justify="between" align="center" gap="3">
                   <Flex gap="3" align="center" className="overflow-hidden">
-                    <Badge color={task.is_done ? "green" : "orange"} size="2" variant="solid">
-                      {task.is_done ? "Hoàn thành" : "Đang làm"}
+                    {/* Badge trạng thái */}
+                    <Badge color={task.is_done ? "pink" : "cyan"} size="2" variant="solid">
+                      {task.is_done ? "Đã khắc ghi ❤️" : "Mới gửi ✨"}
                     </Badge>
                     
+                    {/* Nội dung: Không gạch ngang nữa, mà in đậm/đổi màu */}
                     <Text 
                       size="3" 
-                      weight="medium"
-                      className={`truncate ${task.is_done ? "line-through text-gray-400" : "text-gray-800"}`}
+                      weight={task.is_done ? "bold" : "medium"}
+                      className={`truncate ${task.is_done ? "text-rose-700" : "text-gray-800"}`}
                     >
                       {task.content}
                     </Text>
@@ -178,11 +182,11 @@ const SampleIntegration = () => {
 
                   <Flex gap="2" shrink="0">
                     {!task.is_done && (
-                      <Button color="green" variant="soft" onClick={() => completeTask(task.id)} className="cursor-pointer">
-                        <CheckIcon /> <span className="hidden sm:inline">Xong</span>
+                      <Button color="pink" variant="soft" onClick={() => cherishGratitude(task.id)} className="cursor-pointer">
+                        <HeartFilledIcon /> <span className="hidden sm:inline">Khắc ghi</span>
                       </Button>
                     )}
-                    <Button color="red" variant="soft" onClick={() => deleteTask(task.id)} className="cursor-pointer">
+                    <Button color="gray" variant="ghost" onClick={() => forgetGratitude(task.id)} className="cursor-pointer hover:bg-gray-200">
                       <TrashIcon /> <span className="hidden sm:inline">Xóa</span>
                     </Button>
                   </Flex>
