@@ -1,55 +1,59 @@
 # 🌸 Chain of Gratitude (On-Chain Journal)
 
+<<<<<<< HEAD
 **Dự án Final Project**
+=======
+**Final Project Submission**
+>>>>>>> a280906 (Update)
 
-Đây là ứng dụng **Nhật ký Biết Ơn** (Decentralized Gratitude Journal) chạy trên mạng lưới IOTA Testnet. Ứng dụng giúp người dùng lưu giữ những điều tốt đẹp, những lời cảm ơn một cách vĩnh cửu (immutable) trên Blockchain.
+This is a **Decentralized Gratitude Journal** application running on the IOTA Testnet. The application allows users to preserve positive moments and expressions of gratitude immutably on the Blockchain.
 
-## 📖 Giới thiệu
-Thay vì một danh sách công việc khô khan, **Chain of Gratitude** biến các thao tác CRUD (Tạo, Đọc, Sửa, Xóa) trên Blockchain thành một trải nghiệm cảm xúc:
-- Gửi đi năng lượng tích cực.
-- "Khắc ghi" những khoảnh khắc đẹp vào tim (và vào chuỗi khối).
+## 📖 Introduction
+Instead of a standard, dry To-Do List, **Chain of Gratitude** transforms basic CRUD operations (Create, Read, Update, Delete) on the Blockchain into an emotional experience:
+- Sending out positive energy.
+- "Cherishing" beautiful moments in the heart (and on the chain).
 
-## 🌟 Tính năng
-- **Gửi lời biết ơn (Create):** Tạo một Object chứa nội dung biết ơn và lưu trực tiếp lên Blockchain.
-- **Dòng chảy ký ức (Read):** Tự động tải và hiển thị danh sách các điều biết ơn của người dùng từ ví.
-- **Khắc ghi (Update State):** Chuyển trạng thái từ "Mới gửi" sang "Đã khắc ghi" (Thay đổi trường `is_done` trên contract).
-- **Buông bỏ (Delete):** Xóa bỏ những điều không còn phù hợp khỏi dòng chảy ký ức.
-- **Giao diện:** Thiết kế ấm áp (Rose/Pink theme), hỗ trợ tương tác mượt mà với Radix UI & Tailwind CSS.
+## 🌟 Features
+- **Sending Gratitude (Create):** Create an Object containing the gratitude message and store it directly on-chain.
+- **Stream of Memories (Read):** Automatically fetch and display the user's gratitude list from the wallet.
+- **Cherish (Update State):** Change the status from "New" to "Cherished" (updates the `is_done` field on the contract).
+- **Let Go (Delete):** Permanently remove items that no longer resonate from the stream of memories.
+- **Interface:** Warm design (Rose/Pink theme), supporting smooth interaction with Radix UI & Tailwind CSS.
 
-## 💡 Lưu ý về Cấu trúc (Technical Note)
-Dự án được xây dựng dựa trên cốt lõi kỹ thuật của một **To-Do List (CRUD Application)**:
+## 💡 Technical Note on Structure
+The project is built upon the technical core of a **To-Do List (CRUD Application)**:
 - Repo Name: `to-do-list`
 - Smart Contract Module: `todo_list::todo_list`
 - Struct: `Task`
 
-Tuy nhiên, Frontend đã được tùy biến (re-skin) hoàn toàn để phục vụ Use-case là "Chain of Gratitude". Điều này chứng minh tính linh hoạt của Move Object: cùng một cấu trúc dữ liệu có thể phục vụ nhiều mục đích khác nhau.
+However, the Frontend has been completely re-skinned to serve the "Chain of Gratitude" use case. This demonstrates the flexibility of Move Objects: the same data structure can serve multiple different purposes.
 
-## 🔧 Thông tin kỹ thuật
+## 🔧 Technical Information
 - **Network:** IOTA Testnet
 - **Smart Contract Language:** Move
 - **Frontend:** Next.js, TypeScript, IOTA dApp Kit, Radix UI
 - **Package ID:** `0x572fe621c85d764c1564837f5deb8273dfe5631e8184ef4a08f49e83cecc67d5`
 
-## 🚀 Hướng dẫn cài đặt & Chạy
+## 🚀 Installation & Setup
 
-### 1. Yêu cầu
-- Node.js (v18 trở lên)
+### 1. Requirements
+- Node.js (v18 or later)
 - Pnpm
-- Ví IOTA Wallet (Extension)
+- IOTA Wallet (Browser Extension)
 
-### 2. Cài đặt
+### 2. Installation
 ```bash
-# Clone dự án
+# Clone the repository
 git clone https://github.com/Anh-iscrying/Chain-of-Gratitude.git
 cd to-do-list
 
-# Cài đặt thư viện
+# Install dependencies
 pnpm install
 ```
 
-### 3. Chạy Front-end
+### 3. Run Front-end
 ```bash
 pnpm dev
 ```
-Mở trình duyệt tại: http://localhost:3000
+Open your browser at: http://localhost:3000
 

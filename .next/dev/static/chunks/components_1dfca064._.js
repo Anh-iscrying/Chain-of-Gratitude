@@ -70,7 +70,7 @@ const SampleIntegration = ()=>{
     const currentAccount = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$dapp$2d$kit$40$0$2e$7$2e$0_$40$tanstack$2b$react$2d$query$40$5$2e$90$2e$12_react$40$19$2e$2$2e$0_$5f40$types$2b$react$2d$dom$40$19$2e$2$2e$_410dfa514cd7abdfed665c03c0db9be6$2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCurrentAccount"])();
     const { mutate: signAndExecuteTransaction } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$dapp$2d$kit$40$0$2e$7$2e$0_$40$tanstack$2b$react$2d$query$40$5$2e$90$2e$12_react$40$19$2e$2$2e$0_$5f40$types$2b$react$2d$dom$40$19$2e$2$2e$_410dfa514cd7abdfed665c03c0db9be6$2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSignAndExecuteTransaction"])();
     const [taskContent, setTaskContent] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    // 1. QUERY DATA (Lấy dữ liệu từ Blockchain)
+    // 1. QUERY DATA
     const { data: tasksData, refetch, isPending } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$dapp$2d$kit$40$0$2e$7$2e$0_$40$tanstack$2b$react$2d$query$40$5$2e$90$2e$12_react$40$19$2e$2$2e$0_$5f40$types$2b$react$2d$dom$40$19$2e$2$2e$_410dfa514cd7abdfed665c03c0db9be6$2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIotaClientQuery"])("getOwnedObjects", {
         owner: currentAccount?.address,
         filter: {
@@ -83,8 +83,8 @@ const SampleIntegration = ()=>{
         enabled: !!currentAccount,
         refetchInterval: 3000
     });
-    // --- HÀM XỬ LÝ TRANSACTION ---
-    // 1. Gửi lời biết ơn (Thực chất là tạo Task)
+    // --- TRANSACTION HANDLERS ---
+    // 1. Create Gratitude (Task)
     const createGratitude = ()=>{
         if (!taskContent) return;
         const tx = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$iota$2d$sdk$40$1$2e$9$2e$0_typescript$40$5$2e$9$2e$3$2f$node_modules$2f40$iota$2f$iota$2d$sdk$2f$dist$2f$esm$2f$transactions$2f$Transaction$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Transaction"]();
@@ -94,9 +94,9 @@ const SampleIntegration = ()=>{
                 tx.pure.string(taskContent)
             ]
         });
-        executeTx(tx, "Đã gửi lời biết ơn lên vũ trụ! 🌸", ()=>setTaskContent(""));
+        executeTx(tx, "Gratitude sent to the universe! 🌸", ()=>setTaskContent(""));
     };
-    // 2. Khắc ghi/Trân trọng (Thực chất là Complete Task)
+    // 2. Cherish (Complete Task)
     const cherishGratitude = (objectId)=>{
         const tx = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$iota$2d$sdk$40$1$2e$9$2e$0_typescript$40$5$2e$9$2e$3$2f$node_modules$2f40$iota$2f$iota$2d$sdk$2f$dist$2f$esm$2f$transactions$2f$Transaction$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Transaction"]();
         tx.moveCall({
@@ -105,9 +105,9 @@ const SampleIntegration = ()=>{
                 tx.object(objectId)
             ]
         });
-        executeTx(tx, "Đã khắc ghi điều này vào tim! ❤️");
+        executeTx(tx, "Cherished this moment forever! ❤️");
     };
-    // 3. Buông bỏ/Xóa (Thực chất là Delete Task)
+    // 3. Let Go (Delete Task)
     const forgetGratitude = (objectId)=>{
         const tx = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$iota$2b$iota$2d$sdk$40$1$2e$9$2e$0_typescript$40$5$2e$9$2e$3$2f$node_modules$2f40$iota$2f$iota$2d$sdk$2f$dist$2f$esm$2f$transactions$2f$Transaction$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Transaction"]();
         tx.moveCall({
@@ -116,7 +116,7 @@ const SampleIntegration = ()=>{
                 tx.object(objectId)
             ]
         });
-        executeTx(tx, "Đã xóa khỏi dòng chảy ký ức.");
+        executeTx(tx, "Let go from the stream of memories.");
     };
     // Helper function
     const executeTx = (tx, successMsg, callback)=>{
@@ -130,11 +130,11 @@ const SampleIntegration = ()=>{
             },
             onError: (err)=>{
                 console.error(err);
-                alert("Lỗi: " + err.message);
+                alert("Error: " + err.message);
             }
         });
     };
-    // --- GIAO DIỆN ---
+    // --- UI RENDER ---
     if (!currentAccount) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex min-h-screen items-center justify-center bg-rose-50 text-black",
@@ -153,7 +153,7 @@ const SampleIntegration = ()=>{
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                         size: "4",
                         className: "text-gray-600",
-                        children: "Kết nối ví để bắt đầu hành trình biết ơn."
+                        children: "Connect wallet to start your gratitude journey."
                     }, void 0, false, {
                         fileName: "[project]/components/sample.tsx",
                         lineNumber: 93,
@@ -179,8 +179,7 @@ const SampleIntegration = ()=>{
             is_done: fields?.is_done
         };
     }) || [];
-    return(// Đổi nền sang màu hồng nhạt (rose-50) cho ấm áp
-    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen p-8 bg-rose-50 text-gray-900",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$container$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Container"], {
             size: "3",
@@ -189,20 +188,20 @@ const SampleIntegration = ()=>{
                     size: "8",
                     align: "center",
                     className: "mb-2 text-rose-600 drop-shadow-sm font-serif",
-                    children: "🌸 Chuỗi Biết Ơn (On-Chain)"
+                    children: "🌸 Chain of Gratitude"
                 }, void 0, false, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 112,
+                    lineNumber: 111,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                     align: "center",
                     as: "p",
                     className: "mb-8 text-gray-500 italic",
-                    children: '"Lưu giữ những điều tốt đẹp vĩnh cửu trên Blockchain"'
+                    children: '"Preserve beautiful moments eternally on the Blockchain"'
                 }, void 0, false, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 115,
+                    lineNumber: 114,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -211,10 +210,10 @@ const SampleIntegration = ()=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$heading$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
                             size: "4",
                             className: "mb-4 text-gray-800 font-bold",
-                            children: "Hôm nay bạn biết ơn điều gì?"
+                            children: "What are you grateful for today?"
                         }, void 0, false, {
                             fileName: "[project]/components/sample.tsx",
-                            lineNumber: 121,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -224,18 +223,18 @@ const SampleIntegration = ()=>{
                                     className: "flex-grow",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                         type: "text",
-                                        placeholder: "Ví dụ: Cảm ơn bản thân vì đã không bỏ cuộc...",
+                                        placeholder: "Ex: Thank you myself for not giving up...",
                                         value: taskContent,
                                         onChange: (e)=>setTaskContent(e.target.value),
                                         className: "w-full p-3 border border-rose-200 rounded-lg text-black bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rose-400 transition-all"
                                     }, void 0, false, {
                                         fileName: "[project]/components/sample.tsx",
-                                        lineNumber: 127,
+                                        lineNumber: 126,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false, {
                                     fileName: "[project]/components/sample.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 125,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -250,27 +249,26 @@ const SampleIntegration = ()=>{
                                             className: "w-4 h-4 mr-2"
                                         }, void 0, false, {
                                             fileName: "[project]/components/sample.tsx",
-                                            lineNumber: 145,
+                                            lineNumber: 144,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        " ",
-                                        "GỬI LỜI BIẾT ƠN"
+                                        "SEND GRATITUDE"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/sample.tsx",
-                                    lineNumber: 137,
+                                    lineNumber: 136,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/sample.tsx",
-                            lineNumber: 125,
+                            lineNumber: 124,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 120,
+                    lineNumber: 119,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$heading$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Heading"], {
@@ -278,35 +276,35 @@ const SampleIntegration = ()=>{
                     mb: "4",
                     className: "text-gray-800 border-b border-rose-200 pb-2",
                     children: [
-                        "Nhật ký biết ơn của tôi (",
+                        "My Gratitude Journal (",
                         tasks.length,
                         ")"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 152,
+                    lineNumber: 151,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 isPending ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                     className: "text-gray-500 italic",
-                    children: "Đang lắng nghe vũ trụ..."
+                    children: "Listening to the universe..."
                 }, void 0, false, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 157,
+                    lineNumber: 156,
                     columnNumber: 11
                 }, ("TURBOPACK compile-time value", void 0)) : tasks.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center p-8 bg-white rounded border border-dashed border-rose-300",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
                         className: "text-gray-500",
-                        children: "Chưa có hạt mầm nào. Hãy gieo điều đầu tiên!"
+                        children: "No seeds yet. Plant your first one! 🌱"
                     }, void 0, false, {
                         fileName: "[project]/components/sample.tsx",
-                        lineNumber: 160,
+                        lineNumber: 159,
                         columnNumber: 14
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 159,
+                    lineNumber: 158,
                     columnNumber: 11
                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex flex-col gap-3",
@@ -326,10 +324,10 @@ const SampleIntegration = ()=>{
                                                 color: task.is_done ? "pink" : "cyan",
                                                 size: "2",
                                                 variant: "solid",
-                                                children: task.is_done ? "Đã khắc ghi ❤️" : "Mới gửi ✨"
+                                                children: task.is_done ? "Cherished ❤️" : "Just Sent ✨"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sample.tsx",
-                                                lineNumber: 169,
+                                                lineNumber: 168,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$text$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -339,13 +337,13 @@ const SampleIntegration = ()=>{
                                                 children: task.content
                                             }, void 0, false, {
                                                 fileName: "[project]/components/sample.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 173,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/sample.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 166,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$flex$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Flex"], {
@@ -360,22 +358,22 @@ const SampleIntegration = ()=>{
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$react$2d$icons$40$1$2e$3$2e$2_react$40$19$2e$2$2e$0$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$icons$2f$dist$2f$react$2d$icons$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeartFilledIcon"], {}, void 0, false, {
                                                         fileName: "[project]/components/sample.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 185,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     " ",
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "hidden sm:inline",
-                                                        children: "Khắc ghi"
+                                                        children: "Cherish"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/sample.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 185,
                                                         columnNumber: 45
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/sample.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 184,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$themes$40$3$2e$2$2e$1_$40$types$2b$react$2d$dom$40$19$2e$2$2e$3_$40$types$2b$react$40$19$2e$2$2e$7_$5f40$types$2b$react$40$19$2e$2$2e$7_0b95fe46484f885d28446c960740f384$2f$node_modules$2f40$radix$2d$ui$2f$themes$2f$dist$2f$esm$2f$components$2f$button$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -386,57 +384,57 @@ const SampleIntegration = ()=>{
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$radix$2d$ui$2b$react$2d$icons$40$1$2e$3$2e$2_react$40$19$2e$2$2e$0$2f$node_modules$2f40$radix$2d$ui$2f$react$2d$icons$2f$dist$2f$react$2d$icons$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TrashIcon"], {}, void 0, false, {
                                                         fileName: "[project]/components/sample.tsx",
-                                                        lineNumber: 190,
+                                                        lineNumber: 189,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     " ",
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$3_$40$babel$2b$core$40$7$2e$28$2e$5_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                         className: "hidden sm:inline",
-                                                        children: "Xóa"
+                                                        children: "Let Go"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/sample.tsx",
-                                                        lineNumber: 190,
+                                                        lineNumber: 189,
                                                         columnNumber: 37
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/sample.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 188,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/sample.tsx",
-                                        lineNumber: 183,
+                                        lineNumber: 182,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/sample.tsx",
-                                lineNumber: 166,
+                                lineNumber: 165,
                                 columnNumber: 17
                             }, ("TURBOPACK compile-time value", void 0))
                         }, task.id, false, {
                             fileName: "[project]/components/sample.tsx",
-                            lineNumber: 165,
+                            lineNumber: 164,
                             columnNumber: 15
                         }, ("TURBOPACK compile-time value", void 0)))
                 }, void 0, false, {
                     fileName: "[project]/components/sample.tsx",
-                    lineNumber: 163,
+                    lineNumber: 162,
                     columnNumber: 11
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/components/sample.tsx",
-            lineNumber: 111,
+            lineNumber: 110,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/components/sample.tsx",
-        lineNumber: 110,
+        lineNumber: 109,
         columnNumber: 5
-    }, ("TURBOPACK compile-time value", void 0)));
+    }, ("TURBOPACK compile-time value", void 0));
 };
 _s(SampleIntegration, "IN5VnxeIWG+lIDefgGrIc+X4sAU=", false, function() {
     return [
