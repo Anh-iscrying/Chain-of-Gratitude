@@ -26,7 +26,7 @@ Dự án Final Project cho khóa học Rise In. Đây là ứng dụng quản l�
 ### 2. Cài đặt
 ```bash
 # Clone dự án
-git clone <link-repo-cua-ban>
+git clone [<link-repo-cua-ban>](https://github.com/Anh-iscrying/to-do-list.git)
 cd to-do-list
 
 # Cài đặt thư viện
