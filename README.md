@@ -1,6 +1,6 @@
 # 🌸 Chain of Gratitude (On-Chain Journal)
 
-**Dự án Final Project cho khóa học Rise In - IOTA Move Developer.**
+**Dự án Final Project**
 
 Đây là ứng dụng **Nhật ký Biết Ơn** (Decentralized Gratitude Journal) chạy trên mạng lưới IOTA Testnet. Ứng dụng giúp người dùng lưu giữ những điều tốt đẹp, những lời cảm ơn một cách vĩnh cửu (immutable) trên Blockchain.
 
